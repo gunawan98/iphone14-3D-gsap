@@ -9,7 +9,6 @@ import React, {
 import {
   ViewerApp,
   AssetManagerPlugin,
-  AssetManagerBasicPopupPlugin,
   GBufferPlugin,
   ProgressivePlugin,
   TonemapPlugin,
@@ -18,7 +17,6 @@ import {
   BloomPlugin,
   GammaCorrectionPlugin,
   addBasePlugins,
-  CanvasSnipperPlugin,
   mobileAndTabletCheck,
 } from "webgi";
 import gsap from "gsap";
@@ -59,11 +57,14 @@ const WebgiViewer = forwardRef((props, ref) => {
     },
   }));
 
-  const memoizedScrollAnimation = useCallback((position, target, onUpdate) => {
-    if (position && target && onUpdate) {
-      scrollAnimation(position, target, isMobile, onUpdate);
-    }
-  }, []);
+  const memoizedScrollAnimation = useCallback(
+    (position, target, isMobile, onUpdate) => {
+      if (position && target && onUpdate) {
+        scrollAnimation(position, target, isMobile, onUpdate);
+      }
+    },
+    []
+  );
 
   const setupViewer = useCallback(async () => {
     // Initialize the viewer
